@@ -65,17 +65,14 @@ export default function Expenses({ partnerView }: Props) {
   const [categories, setCategories] = useState<string[]>([]);
   const [loadingCats, setLoadingCats] = useState(true);
 
-  // Fetch categories from Google Sheets API with array safety check
+  // Fetch categories from Google Sheets API
   useEffect(() => {
-    fetch('https://script.google.com/macros/s/AKfycbzVLcSiARv19aocelLtIYM9HLjPa2lpiRhO8TlIIAe_xgXGBQoHvMIdNDc5r9Eudw0q_w/exec')
+    // ⚠️ REPLACE THIS URL WITH YOUR ACTUAL GOOGLE SCRIPT URL ⚠️
+    // Make sure it ends with ?action=getCategories
+    fetch('https://script.google.com/macros/s/AKfycbyJFkeHJUhwEOrgq9OwxsFu6fdX9ldFBf9PH9x_PdocGFh1DIgL4b3a-L1h0i7w7qT2/exec?action=getCategories')
       .then(res => res.json())
       .then(data => {
-        if (Array.isArray(data)) {
-          setCategories(data);
-        } else {
-          console.error("Google Script returned non-array data:", data);
-          setCategories(['General Expense']);
-        }
+        setCategories(data);
         setLoadingCats(false);
       })
       .catch(err => {
@@ -111,7 +108,7 @@ export default function Expenses({ partnerView }: Props) {
     setPendingScan(result);
   }
 
-  /** User accepts the OCR result - pre-fills the form. */
+  /** User accepts the OCR result — pre-fills the form. */
   function acceptScan() {
     if (!pendingScan) return;
     setForm(f => ({
@@ -205,7 +202,7 @@ export default function Expenses({ partnerView }: Props) {
                     </span>
                   )}
                   {!pendingScan.gross && !pendingScan.date && (
-                    <span style={{ fontSize: '0.8rem', opacity: 0.75 }}>Nothing detected - enter manually</span>
+                    <span style={{ fontSize: '0.8rem', opacity: 0.75 }}>Nothing detected — enter manually</span>
                   )}
                 </div>
                 <div className="scan-confirm-actions">
