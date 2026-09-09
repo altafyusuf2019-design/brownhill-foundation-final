@@ -69,7 +69,7 @@ export default function Expenses({ partnerView }: Props) {
   useEffect(() => {
     // ⚠️ REPLACE THIS URL WITH YOUR ACTUAL GOOGLE SCRIPT URL ⚠️
     // Make sure it ends with ?action=getCategories
-    fetch('https://script.google.com/macros/s/AKfycbyx2YZN8tsFigQq3CTncTmJV_6VzkmUUmnztQzckLRDmEu5UCY5lC9CHlycWP-BTeI0ag/exec')
+    fetch('https://script.google.com/macros/s/AKfycbzVLcSiARv19aocelLtIYM9HLjPa2lpiRhO8TlIIAe_xgXGBQoHvMIdNDc5r9Eudw0q_w/exec')
       .then(res => res.json())
       .then(data => {
         setCategories(data);
